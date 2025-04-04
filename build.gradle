@@ -390,7 +390,8 @@ project(':iceberg-data') {
       exclude group: 'org.apache.hive', module: 'hive-storage-api'
     }
 
-    implementation(libs.parquet.avro) {
+    implementation(libs.parquet.column)
+    testImplementation(libs.parquet.avro) {
       exclude group: 'org.apache.avro', module: 'avro'
       // already shaded by Parquet
       exclude group: 'it.unimi.dsi'
@@ -849,12 +850,8 @@ project(':iceberg-arrow') {
 
     runtimeOnly libs.netty.buffer
 
-    implementation(libs.parquet.avro) {
-      exclude group: 'org.apache.avro', module: 'avro'
-      // already shaded by Parquet
-      exclude group: 'it.unimi.dsi'
-      exclude group: 'org.codehaus.jackson'
-    }
+    implementation(libs.parquet.column)
+    implementation(libs.parquet.hadoop)
 
     testImplementation project(path: ':iceberg-core', configuration: 'testArtifacts')
     // To run ArrowReaderTest test cases, :netty-common is needed.

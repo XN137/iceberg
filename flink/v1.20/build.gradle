@@ -48,7 +48,8 @@ project(":iceberg-flink:iceberg-flink-${flinkMajorVersion}") {
       exclude group: 'org.apache.avro', module: 'avro'
     }
 
-    implementation(libs.parquet.avro) {
+    implementation(libs.parquet.column)
+    testImplementation(libs.parquet.avro) {
       exclude group: 'org.apache.avro', module: 'avro'
       // already shaded by Parquet
       exclude group: 'it.unimi.dsi'
